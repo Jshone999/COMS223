@@ -1,73 +1,53 @@
 package edu.sussex.coms223.lab1;
 
-import java.util.Arrays;
-
-public class ArrayList<E> implements List<E> 
-{
-	
+public class ArrayList<E> implements List<E> {
 	private Object[] data = new Object[0];
 
-	public boolean add(E e) 
-	{
-		if(e == null)
-		{
-			throw new IllegalArgumentException(" Null Values Not Allowed. ");
-		}
-		
-		data = Arrays.copyOf(data, data.length+1);
-		
-		data[data.length-1] = e;
-		
-		return false;
+	@Override
+	public boolean add(E e) {
+		if (e == null)
+			throw new IllegalArgumentException("null values not allowed");
+		Object[] newData = new Object[data.length + 1];
+		for (int i = 0; i < data.length; i++)
+			newData[i] = data[i];
+		newData[newData.length - 1] = e;
+		data = newData;
+		return true;
 	}
 
-	public boolean remove(E e) 
-	{
-		int removed = 0;
-		
-		for(int i = 0; i < data.length; i++)
-		{
-			if(data[i].equals(e));
-			{
-				removed++;
-			}
+	@Override
+	public boolean remove(E e) {
+		int index = -1;
+		for (int i = 0; i < data.length && index == -1; i++) {
+			if (data[i].equals(e))
+				index = i; 
 		}
-		
-		if(removed > 0)
-		{
-			Object[] newData = new Object[data.length-removed];
-			
-			for(int i = 0, j = 0; i < data.length; i++)
-			{
-				if(!data[i].equals(e))
-				{
-					newData [j++] = data[i];
-				}
-				
-				data = newData;
-			}
+		if (index != -1) {
+			Object[] newData = new Object[data.length - 1];
+			for (int i = 0; i < index; i++)
+				newData[i] = data[i];
+			for (int i = index + 1; i < data.length; i++)
+				newData[i - 1] = data[i];
+			data = newData;
 		}
-	
-		return false;
+		return index != -1;
 	}
 
 	@SuppressWarnings("unchecked")
-	public E get(int index) 
-	{
-		{
-			return (E) data[index];
-		}
+	@Override
+	public E get(int index) {
+		if(index < 0 || index >= data.length)
+			throw new IllegalArgumentException("Index out of bounds.");
+		return (E) data[index];
 	}
 
-	public int size() 
-	{
-		int size = data.length;
-		return size;
+	@Override
+	public int size() {
+		return data.length;
 	}
-	
-	public void clear() 
-	{
+
+	@Override
+	public void clear() {
 		data = new Object[0];
 	}
-	
 }
