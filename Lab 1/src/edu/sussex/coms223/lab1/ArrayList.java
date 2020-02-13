@@ -20,7 +20,7 @@ public class ArrayList<E> implements List<E> {
 		int index = -1;
 		for (int i = 0; i < data.length && index == -1; i++) {
 			if (data[i].equals(e))
-				index = i; 
+				index = i;
 		}
 		if (index != -1) {
 			Object[] newData = new Object[data.length - 1];
@@ -36,8 +36,8 @@ public class ArrayList<E> implements List<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E get(int index) {
-		if(index < 0 || index >= data.length)
-			throw new IllegalArgumentException("Index out of bounds.");
+		if (index < 0 || index >= data.length)
+			throw new IllegalArgumentException("index out of range");
 		return (E) data[index];
 	}
 
