@@ -13,7 +13,7 @@ import edu.sussex.coms223.lab1.List;
 public class HashMap<K, V> implements Map<K, V> {
 
 	/** The Constant HASHTABLE_SIZE. */
-	final static int HASHTABLE_SIZE = 1000;
+	final static int HASHTABLE_SIZE = 1000000;
 
 	/**
 	 * The hash table. Each array element (i.e. hash table slot) is either null or
